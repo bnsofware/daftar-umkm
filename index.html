@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BN Software — Daftar UMKM ke Google Maps</title>
+<meta name="description" content="Layanan pendaftaran UMKM ke Google Maps. Solusi digital untuk masa depan Anda.">
+<link rel="icon" type="image/png" href="assets/logo-bn.png">
+<style>
+  /* ===== RESET & BASE ===== */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue-dark: #0a1e3f;
+    --blue-primary: #1565c0;
+    --blue-bright: #2196f3;
+    --blue-light: #e3f2fd;
+    --gold: #ffb300;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --gray-800: #1e293b;
+    --success: #16a34a;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== CONTAINER ===== */
+  .wrap {
+    max-width: 520px;
+    margin: 0 auto;
+    background: var(--white);
+    min-height: 100vh;
+    box-shadow: 0 0 60px rgba(10, 30, 63, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== TOP BAR PREMIUM ===== */
+  .topbar {
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue-primary));
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar .dot {
+    width: 6px; height: 6px;
+    background: #4ade80;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-primary) 60%, var(--blue-bright) 100%);
+    color: var(--white);
+    padding: 40px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -30%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: -40%; left: -20%;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(33,150,243,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .logo-wrap {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 24px;
+  }
+  .logo-wrap img {
+    max-width: 180px;
+    height: auto;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25));
+  }
+  .logo-text-fallback {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--white);
+  }
+  .logo-text-fallback span { color: var(--blue-bright); }
+
+  .hero h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(255,179,0,0.4) 60%);
+    padding: 0 4px;
+  }
+  .hero p {
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+    opacity: 0.92;
+    font-weight: 500;
+  }
+
+  /* ===== BADGE / TRUST ===== */
+  .trust {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+  }
+  .trust span {
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.15);
+    padding: 5px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  /* ===== BENEFITS ===== */
+  .benefits {
+    padding: 28px 24px;
+    background: var(--gray-50);
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--blue-primary);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .benefit-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--gray-200);
+    transition: all 0.2s;
+  }
+  .benefit-item:hover {
+    border-color: var(--blue-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(21,101,192,0.1);
+  }
+  .benefit-icon {
+    flex-shrink: 0;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .benefit-text {
+    font-size: 13.5px;
+    color: var(--gray-800);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .benefit-text strong { color: var(--blue-dark); }
+
+  /* ===== FORM ===== */
+  .form-section {
+    padding: 32px 24px 40px;
+    background: var(--white);
+  }
+  .form-section h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .form-subtitle {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+  }
+  .form-group { margin-bottom: 16px; }
+  label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--gray-800);
+    letter-spacing: 0.2px;
+  }
+  label .req { color: #dc2626; }
+  input, select, textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    transition: all 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--blue-bright);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(33,150,243,0.12);
+  }
+  input::placeholder, textarea::placeholder {
+    color: var(--gray-400);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* ===== BUTTON ===== */
+  .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
+    color: var(--white);
+    border: none;
+    padding: 17px;
+    font-size: 15px;
+    font-weight: 800;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+    transition: all 0.25s;
+    box-shadow: 0 8px 20px rgba(21,101,192,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: "→";
+    margin-left: 8px;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(21,101,192,0.4);
+  }
+  .btn-primary:hover::after { transform: translateX(4px); }
+  .btn-primary:disabled {
+    background: var(--gray-400);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  .btn-primary:disabled::after { content: ""; }
+
+  .form-note {
+    font-size: 11.5px;
+    color: var(--gray-600);
+    text-align: center;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ===== SUCCESS ===== */
+  .success {
+    display: none;
+    padding: 48px 24px;
+    text-align: center;
+    background: var(--white);
+  }
+  .success.show { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .success-icon {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(22,163,74,0.3);
+  }
+  .success h2 {
+    color: var(--gray-800);
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+  .success p {
+    color: var(--gray-600);
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .btn-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: var(--white);
+    padding: 15px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14.5px;
+    box-shadow: 0 8px 20px rgba(37,211,102,0.35);
+    transition: all 0.2s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--blue-dark);
+    color: var(--white);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    max-width: 120px;
+    margin-bottom: 12px;
+    opacity: 0.95;
+  }
+  .footer-tagline {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 16px;
+  }
+  .footer-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .footer-services span {
+    font-size: 10.5px;
+    background: rgba(255,255,255,0.1);
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: rgba(255,255,255,0.85);
+  }
+  .footer-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13.5px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+  .footer-wa:hover { background: rgba(255,255,255,0.2); }
+  .footer-copy {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div><span class="dot"></span>ONLINE — SIAP BANTU</div>
+    <div>🇮🇩 RANGKASBITUNG</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="logo-wrap">
+      <img src="assets/logo-bn.png" alt="BN Software" 
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <div class="logo-text-fallback" style="display:none;">B<span>N</span> Software</div>
+    </div>
+    <h1>TOKO ANDA <span class="highlight">BELUM ADA</span><br>DI GOOGLE MAPS?</h1>
+    <p>Bantu daftar sampai tampil & terverifikasi</p>
+    <div class="trust">
+      <span>✓ 100% Gratis Konsultasi</span>
+      <span>✓ Proses Cepat</span>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="benefits">
+    <div class="section-label">KENAPA PENTING?</div>
+
+    <div class="benefit-item">
+      <div class="benefit-icon">📍</div>
+      <div class="benefit-text">Orang cari <strong>"dekat sini"</strong> → toko Anda langsung muncul</div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-icon">⭐</div>
+      <div class="benefit-text">Pelanggan <strong>lebih percaya</strong> sebelum datang ke toko</div>
+    </div>
+
+    <div class="benefit-item">
+      <div class="benefit-icon">📱</div>
+      <div class="benefit-text">Foto, jam buka, dan <strong>nomor WA</strong> tampil lengkap</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-section" id="formSection">
+    <h2>📝 Daftar Sekarang</h2>
+    <p class="form-subtitle">Isi data usaha Anda, kami hubungi dalam 1x24 jam</p>
+
+    <form id="umkmForm">
+      <div class="form-group">
+        <label>Nama Usaha <span class="req">*</span></label>
+        <input type="text" name="namaUsaha" required placeholder="Contoh: Warung Kopi Pak Budi">
+      </div>
+
+      <div class="form-group">
+        <label>Nama Pemilik <span class="req">*</span></label>
+        <input type="text" name="namaPemilik" required placeholder="Contoh: Budi Santoso">
+      </div>
+
+      <div class="form-group">
+        <label>Nomor WhatsApp <span class="req">*</span></label>
+        <input type="tel" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
+      </div>
+
+      <div class="form-group">
+        <label>Kategori Usaha <span class="req">*</span></label>
+        <select name="kategori" required>
+          <option value="">-- Pilih Kategori --</option>
+          <option>Warung Kopi / Cafe</option>
+          <option>Warung Makan / Resto</option>
+          <option>Toko Kelontong</option>
+          <option>Laundry</option>
+          <option>Bengkel</option>
+          <option>Toko Kue / Bakery</option>
+          <option>Salon / Barbershop</option>
+          <option>Oleh-oleh / Snack</option>
+          <option>Lainnya</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Alamat Lengkap <span class="req">*</span></label>
+        <textarea name="alamat" required placeholder="Jalan, nomor, RT/RW, desa, kecamatan, kode pos"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Jam Operasional <span class="req">*</span></label>
+        <input type="text" name="jam" required placeholder="Contoh: Senin-Sabtu 08.00-21.00">
+      </div>
+
+      <div class="form-group">
+        <label>Catatan Tambahan (opsional)</label>
+        <textarea name="catatan" placeholder="Contoh: Toko sudah 5 tahun buka, belum pernah online"></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" id="submitBtn">Kirim Pendaftaran</button>
+
+      <div class="form-note">
+        🔒 Data Anda aman & tidak dibagikan ke pihak lain
+      </div>
+    </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success" id="successSection">
+    <div class="success-icon">✓</div>
+    <h2>Pendaftaran Terkirim!</h2>
+    <p>Terima kasih. Tim BN Software akan menghubungi Anda via WhatsApp dalam 1x24 jam untuk proses selanjutnya.</p>
+    <a href="#" class="btn-wa" id="waFollowUp">
+      <span>💬</span> Chat Kami Sekarang
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <img src="assets/logo-bn.png" alt="BN Software" class="footer-logo"
+         onerror="this.style.display='none';">
+    <div class="footer-tagline">Solusi Digital untuk Masa Depan Anda</div>
+    <div class="footer-services">
+      <span>🌐 Web & Mobile App</span>
+      <span>☁️ Cloud Solutions</span>
+      <span>⚙️ System Development</span>
+      <span>🎧 IT Support</span>
+    </div>
+    <a href="#" class="footer-wa" id="waFooter">
+      <span>💬</span> WhatsApp: 08xx-xxxx-xxxx
+    </a>
+    <div class="footer-copy">© 2026 BN Software. All rights reserved.</div>
+  </div>
+
+</div>
+
+<script>
+  // ==========================================
+  // GANTI BAGIAN INI DENGAN DATA KAMU
+  // ==========================================
+  const WA_KAMU = "6281234567890"; // format: 62 + nomor tanpa 0 di depan
+
+  // ==========================================
+  // OPSIONAL: Pakai Formspree biar data tersimpan
+  // Daftar gratis di formspree.io → copy endpoint
+  // ==========================================
+  const FORMSPREE_ENDPOINT = ""; // contoh: "https://formspree.io/f/xxxxx"
+
+  // Update link WA di footer
+  document.getElementById('waFooter').href = `https://wa.me/${WA_KAMU}`;
+  document.getElementById('waFooter').innerHTML = `<span>💬</span> WhatsApp: +${WA_KAMU}`;
+
+  // Handle submit
+  document.getElementById('umkmForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Mengirim...';
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    if (FORMSPREE_ENDPOINT) {
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        if (res.ok) {
+          showSuccess(data);
+        } else {
+          throw new Error('Gagal kirim');
+        }
+      } catch (err) {
+        alert('Gagal kirim. Coba lagi atau hubungi WA langsung.');
+        btn.disabled = false;
+        btn.textContent = 'Kirim Pendaftaran';
+      }
+    } else {
+      showSuccess(data);
+    }
+  });
+
+  function showSuccess(data) {
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successSection').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const pesan = `Halo BN Software, saya mau daftar UMKM ke Google Maps.
+
+*Nama Usaha:* ${data.namaUsaha}
+*Nama Pemilik:* ${data.namaPemilik}
+*Kategori:* ${data.kategori}
+*Alamat:* ${data.alamat}
+*Jam Buka:* ${data.jam}
+*Catatan:* ${data.catatan || '-'}`;
+
+    const waLink = `https://wa.me/${WA_KAMU}?text=${encodeURIComponent(pesan)}`;
+    document.getElementById('waFollowUp').href = waLink;
+  }
+</script>
+
+</body>
+</html>
