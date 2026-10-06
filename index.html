@@ -104,7 +104,7 @@
   .hero .lead {
     position: relative; z-index: 2;
     margin: 12px auto 0;
-    max-width: 340px;
+    max-width: 360px;
     font-size: 14.5px; font-weight: 500; color: rgba(255,255,255,.86);
   }
 
@@ -195,6 +195,70 @@
   .cube { flex-shrink: 0; width: 76px; height: 76px; filter: drop-shadow(0 6px 5px rgba(10,30,63,.22)); }
   .benefit-text h3 { font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin-bottom: 3px; }
   .benefit-text p { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+
+
+  /* ---------- Hook: simulasi hasil pencarian ---------- */
+  .benefits .peek-title { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); text-align: center; margin-bottom: 6px; }
+  .peek-sub { text-align: center; font-size: 13.5px; color: var(--muted); font-weight: 500; margin-bottom: 18px; }
+  .serp {
+    background: var(--white); border: 1px solid var(--line); border-radius: 20px;
+    padding: 14px; margin-bottom: 34px;
+    box-shadow: 0 5px 0 var(--edge), 0 18px 26px -14px rgba(10,30,63,.3);
+  }
+  .serp-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--paper); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 11px 14px; font-size: 14.5px; font-weight: 600; color: var(--ink);
+    box-shadow: inset 0 2px 3px rgba(10,30,63,.08);
+    margin-bottom: 12px;
+  }
+  .serp-bar svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .serp-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 8px; border-bottom: 1px solid var(--line);
+  }
+  .serp-row:last-of-type { border-bottom: none; }
+  .serp-row .pinbox {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    background: linear-gradient(180deg, #5db7ff, #1976d2);
+    box-shadow: 0 3px 0 #0d47a1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .serp-row .pinbox svg { width: 20px; height: 20px; }
+  .serp-row h4 { font-size: 14px; font-weight: 800; color: var(--navy); line-height: 1.25; }
+  .serp-row p { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+  .serp-row .stars { color: #f59e0b; letter-spacing: 1px; }
+  .serp-row .dist { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--blue); white-space: nowrap; }
+  .serp-miss {
+    margin-top: 8px; padding: 14px 12px;
+    border: 2px dashed #f2b83a; background: #fff8e6; border-radius: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .serp-miss .q {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    border: 2px dashed #e0a21c; color: #c47f00; font-weight: 800; font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .serp-miss h4 { font-size: 14px; font-weight: 800; color: #7a4b00; line-height: 1.3; }
+  .serp-miss p { font-size: 12.5px; color: #8a6a2b; font-weight: 500; line-height: 1.45; }
+  .serp-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; }
+  .serp-foot small { font-size: 11.5px; color: var(--placeholder); font-weight: 500; }
+  .serp-foot a { font-size: 13px; font-weight: 800; color: var(--blue); text-decoration: none; white-space: nowrap; }
+  .serp-foot a:focus-visible { outline: 3px solid #ffc83d; outline-offset: 3px; border-radius: 6px; }
+
+  /* ---------- Cara kerja ---------- */
+  .steps { padding: 34px 20px 8px; background: var(--white); }
+  .steps h2 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); text-align: center; margin-bottom: 6px; }
+  .steps .sub { text-align: center; font-size: 13.5px; color: var(--muted); font-weight: 500; margin-bottom: 22px; }
+  .step { display: flex; align-items: center; gap: 12px; position: relative; padding-bottom: 20px; }
+  .step:last-child { padding-bottom: 0; }
+  .step:not(:last-child)::after {
+    content: ""; position: absolute; left: 31px; top: 62px; bottom: -2px;
+    border-left: 2px dashed #b7c9e2;
+  }
+  .step .ico { width: 64px; height: 64px; flex-shrink: 0; filter: drop-shadow(0 5px 4px rgba(10,30,63,.25)); }
+  .step h3 { font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; }
+  .step p { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
 
   /* ---------- Form ---------- */
   .form-section {
@@ -388,8 +452,8 @@
       <div class="logo-text-fallback" style="display:none;">B<span>N</span> Software</div>
     </div>
 
-    <h1>Toko Anda belum ada <span class="l2">di Google Maps?</span></h1>
-    <p class="lead">Kami bantu daftar sampai toko Anda tampil dan terverifikasi.</p>
+    <h1>Pembeli cari “dekat sini”, <span class="l2">toko Anda sudah muncul?</span></h1>
+    <p class="lead">Kalau belum ada di Google Maps, pembeli yang butuh Anda bisa pindah ke toko sebelah. Kami bantu daftar sampai terverifikasi.</p>
 
     <div class="scene">
       <svg class="scene-svg" viewBox="0 0 420 280" role="img" aria-label="Ilustrasi isometrik peta kota dengan pin lokasi toko">
@@ -451,6 +515,16 @@
   </div>
 
   <div class="benefits">
+    <h2 class="peek-title">Ini yang dilihat calon pembeli</h2>
+    <p class="peek-sub">Bayangkan ada yang mencari usaha seperti Anda di sekitarnya.</p>
+    <div class="serp" role="img" aria-label="Contoh hasil pencarian Google Maps: dua toko pesaing muncul, toko Anda belum ada">
+      <div class="serp-bar"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M16 16 L21 21"/></svg>warung kopi dekat sini</div>
+      <div class="serp-row"><span class="pinbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22 C6 15 4 11 4 8.5 A8 8 0 0 1 20 8.5 C20 11 18 15 12 22 Z" fill="#fff"/><circle cx="12" cy="9" r="3" fill="#1976d2"/></svg></span><div><h4>Kopi Sudut</h4><p><span class="stars">★★★★★</span> 4,8 · Buka sekarang</p></div><span class="dist">300 m</span></div>
+      <div class="serp-row"><span class="pinbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22 C6 15 4 11 4 8.5 A8 8 0 0 1 20 8.5 C20 11 18 15 12 22 Z" fill="#fff"/><circle cx="12" cy="9" r="3" fill="#1976d2"/></svg></span><div><h4>Warung Bu Ani</h4><p><span class="stars">★★★★☆</span> 4,5 · Buka sekarang</p></div><span class="dist">450 m</span></div>
+      <div class="serp-miss"><span class="q">?</span><div><h4>Toko Anda belum ada di daftar ini</h4><p>Pembeli lanjut ke toko yang muncul di atas.</p></div></div>
+      <div class="serp-foot"><small>Ilustrasi, nama usaha contoh</small><a href="#formSection">Masuk ke daftar ini ↓</a></div>
+    </div>
+
     <h2>Kenapa penting untuk usaha Anda?</h2>
     <div class="benefit-item">
       <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><path d="M40 47 C33 38 30 33 30 27 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="#ffb300"/><path d="M40 17 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="rgba(160,70,0,.3)"/><circle cx="40" cy="27" r="4.2" fill="#fff8e6"/></svg>
@@ -475,12 +549,29 @@
     </div>
   </div>
 
+  <div class="steps">
+    <h2>Gampang, Anda tinggal isi data</h2>
+    <p class="sub">Tidak perlu paham teknis. Kami yang urus sisanya.</p>
+    <div class="step">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
+      <div><h3>Isi data usaha</h3><p>Nama, alamat, jam buka, dan nomor WA. Cukup 2 menit.</p></div>
+    </div>
+    <div class="step">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-gear"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-gear"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-gear"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-gear"/></g></g></svg>
+      <div><h3>Kami urus pendaftarannya</h3><p>Kami siapkan data dan ajukan ke Google Maps, lalu hubungi Anda lewat WhatsApp.</p></div>
+    </div>
+    <div class="step">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-pin"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-pin"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-pin"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-pin"/></g></g></svg>
+      <div><h3>Toko Anda tampil dan terverifikasi</h3><p>Pembeli sekitar bisa menemukan dan menghubungi Anda.</p></div>
+    </div>
+  </div>
+
   <div class="form-section" id="formSection">
     <div class="form-head">
       <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
       <h2>Daftar sekarang</h2>
     </div>
-    <p class="form-subtitle">Isi data usaha Anda, kami hubungi dalam 1x24 jam.</p>
+    <p class="form-subtitle">Konsultasi gratis. Isi data usaha Anda, kami hubungi dalam 1x24 jam.</p>
 
     <form id="umkmForm">
       <!-- Field rahasia untuk keamanan — harus sama dengan SECRET_KEY di Apps Script -->
