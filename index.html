@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BN Software — Daftar UMKM ke Google Maps</title>
-<meta name="description" content="Layanan pendaftaran UMKM ke Google Maps. Solusi digital untuk masa depan Anda.">
+<title>BN Software — Jasa Daftar & Verifikasi Google Maps</title>
+<meta name="description" content="Jasa daftar dan verifikasi usaha di Google Maps untuk UMKM. Kami urus sampai toko Anda tampil dan terverifikasi.">
 <link rel="icon" type="image/png" href="assets/logo-bn.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +167,40 @@
   .btn-hero:active { transform: translateY(4px); box-shadow: 0 2px 0 #c47f00, 0 8px 14px -6px rgba(0,0,0,.45); }
   .btn-hero svg { width: 18px; height: 18px; }
 
+
+  /* ---------- Harga ---------- */
+  .price {
+    position: relative; z-index: 2;
+    display: inline-flex; flex-direction: column; align-items: center;
+    margin-top: 20px; padding: 10px 26px 12px;
+    background: var(--white); color: var(--navy);
+    border-radius: 18px;
+    box-shadow: 0 6px 0 #b9c9df, 0 18px 26px -8px rgba(0,0,0,.45);
+  }
+  .price small { font-size: 12.5px; font-weight: 700; color: var(--muted); line-height: 1.2; }
+  .price strong { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--blue); }
+  .price strong span { font-size: 18px; font-weight: 800; margin-right: 2px; color: var(--navy); }
+  .hero .btn-hero { margin-top: 20px; }
+  .price-banner {
+    margin-top: 6px; margin-bottom: 4px;
+    padding: 18px 18px 20px; border-radius: 20px; text-align: center;
+    background: linear-gradient(180deg, #ffd45e, #ffb300);
+    color: var(--navy);
+    box-shadow: 0 6px 0 #c47f00, 0 18px 26px -12px rgba(196,127,0,.6);
+  }
+  .price-banner small { font-size: 13px; font-weight: 700; display: block; }
+  .price-banner strong { display: block; font-size: 38px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+  .price-banner strong span { font-size: 20px; margin-right: 2px; }
+  .price-banner p { font-size: 13.5px; font-weight: 600; line-height: 1.5; margin: 4px auto 12px; max-width: 320px; }
+  .price-banner a {
+    display: inline-block; background: var(--navy); color: var(--white);
+    font-size: 13.5px; font-weight: 800; text-decoration: none;
+    padding: 11px 20px; border-radius: 12px;
+    box-shadow: 0 4px 0 #050f22;
+  }
+  .price-banner a:active { transform: translateY(3px); box-shadow: 0 1px 0 #050f22; }
+  .price-banner a:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+
   /* ---------- Benefits ---------- */
   .benefits {
     position: relative; z-index: 3;
@@ -192,6 +226,9 @@
     box-shadow: 0 5px 0 var(--edge), 0 16px 24px -12px rgba(10,30,63,.28);
   }
   .benefit-item:last-child { margin-bottom: 0; }
+  .benefit-item .ico { width: 64px; height: 64px; flex-shrink: 0; margin-left: 4px; filter: drop-shadow(0 5px 4px rgba(10,30,63,.25)); }
+  .svc { padding: 34px 20px 6px; background: var(--white); }
+  .svc h2 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); text-align: center; margin-bottom: 18px; }
   .cube { flex-shrink: 0; width: 76px; height: 76px; filter: drop-shadow(0 6px 5px rgba(10,30,63,.22)); }
   .benefit-text h3 { font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin-bottom: 3px; }
   .benefit-text p { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
@@ -431,6 +468,7 @@
 <g id="g-grid"><rect x="-10" y="-10" width="8" height="8" rx="2"/><rect x="2" y="-10" width="8" height="8" rx="2"/><rect x="-10" y="2" width="8" height="8" rx="2"/><rect x="2" y="2" width="8" height="8" rx="2"/></g>
 <g id="g-pin"><path d="M0 12 C-7 4 -9 0 -9 -4 A9 9 0 0 1 9 -4 C9 0 7 4 0 12 Z"/><circle cx="0" cy="-4" r="3"/></g>
 <g id="g-clock"><circle cx="0" cy="0" r="11"/><path d="M0 -6 V0 L5 3"/></g>
+<g id="g-shield"><path d="M0 -12 L10 -8 V1 C10 7 5 11 0 13 C-5 11 -10 7 -10 1 V-8 Z"/><path d="M-4 1 L-1 4 L5 -3"/></g>
 <g id="g-note"><rect x="-9" y="-11" width="18" height="22" rx="2"/><path d="M-4 -4 H4 M-4 1 H4 M-4 6 H1"/></g>
 <g id="g-globe"><circle cx="0" cy="0" r="11"/><ellipse cx="0" cy="0" rx="5" ry="11"/><path d="M-11 0 H11"/></g>
 <g id="g-cloud"><path d="M-9 8 A6 6 0 0 1 -8 -3 A9 9 0 0 1 9 -3 A5.5 5.5 0 0 1 9 8 Z"/></g>
@@ -452,8 +490,8 @@
       <div class="logo-text-fallback" style="display:none;">B<span>N</span> Software</div>
     </div>
 
-    <h1>Pembeli cari “dekat sini”, <span class="l2">toko Anda sudah muncul?</span></h1>
-    <p class="lead">Kalau belum ada di Google Maps, pembeli yang butuh Anda bisa pindah ke toko sebelah. Kami bantu daftar sampai terverifikasi.</p>
+    <h1>Bingung daftar dan verifikasi Google Maps? <span class="l2">Serahkan ke kami.</span></h1>
+    <p class="lead">Toko belum muncul di peta, atau sudah ada tapi belum terverifikasi? Kami urus sampai tokonya tampil dan terverifikasi. Anda tinggal tunggu kabar.</p>
 
     <div class="scene">
       <svg class="scene-svg" viewBox="0 0 420 280" role="img" aria-label="Ilustrasi isometrik peta kota dengan pin lokasi toko">
@@ -506,72 +544,97 @@
 
     <div class="trust">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg> Konsultasi gratis</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg> Proses cepat</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg> Dibantu sampai terverifikasi</span>
     </div>
 
-    <a href="#formSection" class="btn-hero">Daftar sekarang
+    <div class="price"><small>Mulai dari</small><strong><span>Rp</span>49.999</strong></div>
+    <br>
+    <a href="#formSection" class="btn-hero">Konsultasi gratis sekarang
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M5 12l7 7 7-7"/></svg>
     </a>
   </div>
 
   <div class="benefits">
-    <h2 class="peek-title">Ini yang dilihat calon pembeli</h2>
-    <p class="peek-sub">Bayangkan ada yang mencari usaha seperti Anda di sekitarnya.</p>
+    <h2 class="peek-title">Begini tampilan pencarian pembeli</h2>
+    <p class="peek-sub">Coba bayangkan ada orang lagi cari usaha seperti punya Anda di sekitarnya.</p>
     <div class="serp" role="img" aria-label="Contoh hasil pencarian Google Maps: dua toko pesaing muncul, toko Anda belum ada">
       <div class="serp-bar"><svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M16 16 L21 21"/></svg>warung kopi dekat sini</div>
       <div class="serp-row"><span class="pinbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22 C6 15 4 11 4 8.5 A8 8 0 0 1 20 8.5 C20 11 18 15 12 22 Z" fill="#fff"/><circle cx="12" cy="9" r="3" fill="#1976d2"/></svg></span><div><h4>Kopi Sudut</h4><p><span class="stars">★★★★★</span> 4,8 · Buka sekarang</p></div><span class="dist">300 m</span></div>
       <div class="serp-row"><span class="pinbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22 C6 15 4 11 4 8.5 A8 8 0 0 1 20 8.5 C20 11 18 15 12 22 Z" fill="#fff"/><circle cx="12" cy="9" r="3" fill="#1976d2"/></svg></span><div><h4>Warung Bu Ani</h4><p><span class="stars">★★★★☆</span> 4,5 · Buka sekarang</p></div><span class="dist">450 m</span></div>
-      <div class="serp-miss"><span class="q">?</span><div><h4>Toko Anda belum ada di daftar ini</h4><p>Pembeli lanjut ke toko yang muncul di atas.</p></div></div>
-      <div class="serp-foot"><small>Ilustrasi, nama usaha contoh</small><a href="#formSection">Masuk ke daftar ini ↓</a></div>
+      <div class="serp-miss"><span class="q">?</span><div><h4>Toko Anda belum kelihatan di sini</h4><p>Akhirnya pembeli pilih toko yang muncul duluan.</p></div></div>
+      <div class="serp-foot"><small>Cuma contoh, nama toko rekaan</small><a href="#formSection">Bantu toko saya muncul ↓</a></div>
     </div>
 
-    <h2>Kenapa penting untuk usaha Anda?</h2>
+    <h2>Apa untungnya buat usaha Anda?</h2>
     <div class="benefit-item">
       <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><path d="M40 47 C33 38 30 33 30 27 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="#ffb300"/><path d="M40 17 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="rgba(160,70,0,.3)"/><circle cx="40" cy="27" r="4.2" fill="#fff8e6"/></svg>
       <div class="benefit-text">
-        <h3>Muncul saat orang cari “dekat sini”</h3>
-        <p>Toko Anda langsung tampil di peta dan hasil pencarian sekitar lokasi.</p>
+        <h3>Gampang ditemukan orang sekitar</h3>
+        <p>Pas orang cari “dekat sini”, toko Anda langsung muncul di peta.</p>
       </div>
     </div>
     <div class="benefit-item">
       <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><polygon points="40.0,14.0 43.5,23.1 53.3,23.7 45.7,29.9 48.2,39.3 40.0,34.0 31.8,39.3 34.3,29.9 26.7,23.7 36.5,23.1" fill="#b36b00" transform="translate(3 2)"/><polygon points="40.0,14.0 43.5,23.1 53.3,23.7 45.7,29.9 48.2,39.3 40.0,34.0 31.8,39.3 34.3,29.9 26.7,23.7 36.5,23.1" fill="#ffc83d" stroke="#ffb300" stroke-width="1.5" stroke-linejoin="round"/></svg>
       <div class="benefit-text">
-        <h3>Pelanggan lebih percaya</h3>
-        <p>Rating, ulasan, dan foto bikin orang yakin sebelum datang ke toko.</p>
+        <h3>Pembeli jadi lebih yakin</h3>
+        <p>Ada rating, ulasan, dan foto, jadi orang percaya sebelum datang.</p>
       </div>
     </div>
     <div class="benefit-item">
       <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><rect x="30" y="8" width="20" height="36" rx="4.5" fill="#0a1e3f" transform="translate(3 2)"/><rect x="30" y="8" width="20" height="36" rx="4.5" fill="#f1f7ff"/><rect x="33" y="12" width="14" height="26" rx="2.5" fill="#2d82e0"/><circle cx="40" cy="21" r="3.2" fill="#ffc83d"/><path d="M36 29 H44 M36 33 H42" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round"/></svg>
       <div class="benefit-text">
-        <h3>Info lengkap dalam satu tempat</h3>
-        <p>Foto, jam buka, dan nomor WA tampil rapi dan bisa langsung dihubungi.</p>
+        <h3>Info toko lengkap, tinggal klik</h3>
+        <p>Foto, jam buka, dan nomor WA tampil rapi, bisa langsung dihubungi.</p>
       </div>
     </div>
   </div>
 
+  <div class="svc">
+    <h2>Yang kami kerjakan buat Anda</h2>
+    <div class="benefit-item">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-pin"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-pin"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-pin"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-pin"/></g></g></svg>
+      <div class="benefit-text"><h3>Daftarkan toko baru</h3><p>Toko belum ada di Google Maps? Kami buatkan sampai tampil di peta.</p></div>
+    </div>
+    <div class="benefit-item">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-shield"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-shield"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-shield"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-shield"/></g></g></svg>
+      <div class="benefit-text"><h3>Urus verifikasinya</h3><p>Sudah ada tapi belum terverifikasi? Kami bantu prosesnya sampai selesai.</p></div>
+    </div>
+    <div class="benefit-item">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
+      <div class="benefit-text"><h3>Lengkapi info toko</h3><p>Foto, jam buka, jenis usaha, dan nomor WA kami isi biar tampil rapi.</p></div>
+    </div>
+
+    <div class="price-banner">
+      <small>Harga jasa mulai dari</small>
+      <strong><span>Rp</span>49.999</strong>
+      <p>Konsultasi dulu gratis. Kami jelaskan harganya sesuai kebutuhan toko Anda.</p>
+      <a href="#formSection">Tanya harga sekarang ↓</a>
+    </div>
+  </div>
+
   <div class="steps">
-    <h2>Gampang, Anda tinggal isi data</h2>
-    <p class="sub">Tidak perlu paham teknis. Kami yang urus sisanya.</p>
+    <h2>Gampang, Anda cukup isi data</h2>
+    <p class="sub">Nggak perlu ngerti teknis. Sisanya kami yang urus.</p>
     <div class="step">
       <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
-      <div><h3>Isi data usaha</h3><p>Nama, alamat, jam buka, dan nomor WA. Cukup 2 menit.</p></div>
+      <div><h3>Isi data usaha</h3><p>Nama toko, alamat, jam buka, dan nomor WA. Cuma 2 menit.</p></div>
     </div>
     <div class="step">
       <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-gear"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-gear"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-gear"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-gear"/></g></g></svg>
-      <div><h3>Kami urus pendaftarannya</h3><p>Kami siapkan data dan ajukan ke Google Maps, lalu hubungi Anda lewat WhatsApp.</p></div>
+      <div><h3>Kami hubungi lewat WhatsApp</h3><p>Kami jelaskan prosesnya dan apa saja yang perlu Anda siapkan.</p></div>
     </div>
     <div class="step">
       <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-pin"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-pin"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-pin"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-pin"/></g></g></svg>
-      <div><h3>Toko Anda tampil dan terverifikasi</h3><p>Pembeli sekitar bisa menemukan dan menghubungi Anda.</p></div>
+      <div><h3>Kami urus sampai terverifikasi</h3><p>Toko Anda tampil di Google Maps, siap dicari dan dihubungi pembeli.</p></div>
     </div>
   </div>
 
   <div class="form-section" id="formSection">
     <div class="form-head">
       <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
-      <h2>Daftar sekarang</h2>
+      <h2>Konsultasi gratis sekarang</h2>
     </div>
-    <p class="form-subtitle">Konsultasi gratis. Isi data usaha Anda, kami hubungi dalam 1x24 jam.</p>
+    <p class="form-subtitle">Isi data usaha Anda, kami kabari lewat WhatsApp maksimal 1x24 jam.</p>
 
     <form id="umkmForm">
       <!-- Field rahasia untuk keamanan — harus sama dengan SECRET_KEY di Apps Script -->
@@ -606,10 +669,10 @@
       </div>
 
       <div class="field">
-        <label for="f-kategori">Kategori usaha <span class="req">*</span></label>
+        <label for="f-kategori">Jenis usaha <span class="req">*</span></label>
         <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-grid"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-grid"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-grid"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-grid"/></g></g></svg>
           <select id="f-kategori" name="kategori" required>
-            <option value="">Pilih kategori usaha</option>
+            <option value="">Pilih jenis usaha</option>
             <option>Warung Kopi / Cafe</option>
             <option>Warung Makan / Resto</option>
             <option>Toko Kelontong</option>
@@ -624,7 +687,7 @@
       </div>
 
       <div class="field reveal" id="kategoriLainWrap" hidden>
-        <label for="f-kategorilain">Jenis usaha Anda <span class="req">*</span></label>
+        <label for="f-kategorilain">Usaha Anda bergerak di bidang apa? <span class="req">*</span></label>
         <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-store"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-store"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-store"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-store"/></g></g></svg>
           <input id="f-kategorilain" type="text" name="kategorilain" autocomplete="off" placeholder="Contoh: Percetakan, Toko Bunga, Katering">
         </div>
@@ -638,7 +701,7 @@
       </div>
 
       <div class="field">
-        <label for="f-jam">Jam operasional <span class="req">*</span></label>
+        <label for="f-jam">Jam buka <span class="req">*</span></label>
         <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-clock"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-clock"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-clock"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-clock"/></g></g></svg>
           <input id="f-jam" type="text" name="jam" required placeholder="Contoh: Senin-Sabtu 08.00-21.00">
         </div>
@@ -653,20 +716,20 @@
 
       <button type="submit" class="btn-primary" id="submitBtn">
         <span class="spinner" aria-hidden="true"></span>
-        <span class="lbl">Kirim pendaftaran</span>
+        <span class="lbl">Kirim data usaha</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
       </button>
       <div class="form-note">
         <svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-        Data Anda aman dan tidak dibagikan ke pihak lain
+        Data Anda aman, tidak kami bagikan ke siapa pun
       </div>
     </form>
   </div>
 
   <div class="success" id="successSection">
     <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#16a34a"/><polygon points="40,60 66,47 66,61 40,74" fill="#15803d"/><polygon points="40,34 66,47 40,60 14,47" fill="#6ee7a0"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><g transform="translate(40 26)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-12 1 L-4 9 L13 -10" stroke="#0f5e2e" stroke-width="8" transform="translate(3 2.5)"/><path d="M-12 1 L-4 9 L13 -10" stroke="#ffffff" stroke-width="8"/></g></svg>
-    <h2>Pendaftaran terkirim!</h2>
-    <p>Terima kasih. Tim BN Software akan menghubungi Anda via WhatsApp dalam 1x24 jam untuk proses selanjutnya.</p>
+    <h2>Data terkirim!</h2>
+    <p>Terima kasih. Tim BN Software akan menghubungi Anda lewat WhatsApp maksimal 1x24 jam untuk langkah selanjutnya.</p>
     <a href="#" class="btn-wa" id="waFollowUp" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 L5.4 15.6 A8.5 8.5 0 1 1 8.6 18.8 Z"/><path d="M9 9.5 c0 3 2.5 5.5 5.5 5.5"/></svg> Chat kami sekarang
     </a>
@@ -748,7 +811,7 @@
     } catch (err) {
       alert('Gagal kirim: ' + err.message + '\n\nCoba lagi atau hubungi WA langsung.');
       btn.disabled = false;
-      lbl.textContent = 'Kirim pendaftaran';
+      lbl.textContent = 'Kirim data usaha';
     }
   });
 
@@ -757,7 +820,7 @@
     document.getElementById('successSection').classList.add('show');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const pesan = `Halo BN Software, saya mau daftar UMKM ke Google Maps.
+    const pesan = `Halo BN Software, saya mau konsultasi jasa daftar dan verifikasi Google Maps.
 
 *Nama Usaha:* ${data.namausaha}
 *Nama Pemilik:* ${data.namapemilik}
