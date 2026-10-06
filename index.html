@@ -57,8 +57,6 @@
     animation: pulse 2s infinite;
   }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
-
-  /* ===== HERO ===== */
   .hero {
     background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-primary) 60%, var(--blue-bright) 100%);
     color: var(--white);
@@ -79,8 +77,6 @@
     background: radial-gradient(circle, rgba(33,150,243,0.3) 0%, transparent 70%);
     border-radius: 50%;
   }
-
-  /* ===== LOGO HERO — MELEBAR PENUH, PROPORSIONAL ===== */
   .logo-wrap {
     position: relative;
     z-index: 2;
@@ -99,7 +95,6 @@
     padding: 20px 0;
   }
   .logo-text-fallback span { color: var(--blue-bright); }
-
   .hero h1 {
     position: relative; z-index: 2;
     font-size: 24px; font-weight: 800;
@@ -116,8 +111,6 @@
     background: rgba(255,255,255,0.15);
     padding: 5px 12px; border-radius: 20px; backdrop-filter: blur(10px);
   }
-
-  /* ===== BENEFITS ===== */
   .benefits { padding: 28px 20px; background: var(--gray-50); }
   .section-label {
     font-size: 11px; font-weight: 700; color: var(--blue-primary);
@@ -142,8 +135,6 @@
   }
   .benefit-text { font-size: 13.5px; color: var(--gray-800); font-weight: 500; line-height: 1.5; }
   .benefit-text strong { color: var(--blue-dark); }
-
-  /* ===== FORM ===== */
   .form-section { padding: 32px 20px 40px; background: var(--white); }
   .form-section h2 {
     font-size: 20px; font-weight: 800; color: var(--blue-dark);
@@ -165,8 +156,6 @@
   }
   input::placeholder, textarea::placeholder { color: var(--gray-400); }
   textarea { resize: vertical; min-height: 80px; }
-
-  /* ===== BUTTON ===== */
   .btn-primary {
     width: 100%;
     background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
@@ -181,14 +170,11 @@
   .btn-primary:hover::after { transform: translateX(4px); }
   .btn-primary:disabled { background: var(--gray-400); cursor: not-allowed; box-shadow: none; transform: none; }
   .btn-primary:disabled::after { content: ""; }
-
   .form-note {
     font-size: 11.5px; color: var(--gray-600);
     text-align: center; margin-top: 14px;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
-
-  /* ===== SUCCESS ===== */
   .success { display: none; padding: 48px 24px; text-align: center; background: var(--white); }
   .success.show { display: block; animation: fadeIn 0.4s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -209,15 +195,12 @@
     box-shadow: 0 8px 20px rgba(37,211,102,0.35); transition: all 0.2s;
   }
   .btn-wa:hover { transform: translateY(-2px); }
-
-  /* ===== FOOTER ===== */
   .footer {
     background: var(--blue-dark);
     color: var(--white);
     padding: 32px 24px 28px;
     text-align: center;
   }
-  /* Logo footer: proporsional, di tengah, tidak gepeng */
   .footer-logo {
     width: 55%;
     max-width: 200px;
@@ -317,13 +300,16 @@
     <p class="form-subtitle">Isi data usaha Anda, kami hubungi dalam 1x24 jam</p>
 
     <form id="umkmForm">
+      <!-- Field rahasia untuk keamanan — harus sama dengan SECRET_KEY di Apps Script -->
+      <input type="hidden" name="secret" value="bn2026rahasia">
+
       <div class="form-group">
         <label>Nama Usaha <span class="req">*</span></label>
-        <input type="text" name="namaUsaha" required placeholder="Contoh: Warung Kopi Pak Budi">
+        <input type="text" name="namausaha" required placeholder="Contoh: Warung Kopi Pak Budi">
       </div>
       <div class="form-group">
         <label>Nama Pemilik <span class="req">*</span></label>
-        <input type="text" name="namaPemilik" required placeholder="Contoh: Budi Santoso">
+        <input type="text" name="namapemilik" required placeholder="Contoh: Budi Santoso">
       </div>
       <div class="form-group">
         <label>Nomor WhatsApp <span class="req">*</span></label>
@@ -396,8 +382,8 @@
   // ==========================================
   // KONFIGURASI
   // ==========================================
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzcEk622pAfBbqxTowO3fh_H5pOBNa1h8O3KXpXs_HB7bjKEXBepCHOBuZ_AEQznVmT/exec";
   const WA_KAMU = "628158222529";
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/maeqywwq";
 
   // Setup footer WA
   document.getElementById('waFooter').href = `https://wa.me/${WA_KAMU}`;
@@ -411,20 +397,24 @@
     btn.textContent = 'Mengirim...';
 
     const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
+    const urlEncodedData = new URLSearchParams(formData).toString();
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: formData
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlEncodedData
       });
 
       if (res.ok) {
-        showSuccess(data);
+        const result = await res.json();
+        if (result.result === 'success') {
+          showSuccess(Object.fromEntries(formData.entries()));
+        } else {
+          throw new Error(result.message || 'Gagal menyimpan');
+        }
       } else {
-        const err = await res.json();
-        throw new Error(err.error || 'Gagal kirim');
+        throw new Error('Gagal menghubungi server');
       }
     } catch (err) {
       alert('Gagal kirim: ' + err.message + '\n\nCoba lagi atau hubungi WA langsung.');
@@ -440,8 +430,8 @@
 
     const pesan = `Halo BN Software, saya mau daftar UMKM ke Google Maps.
 
-*Nama Usaha:* ${data.namaUsaha}
-*Nama Pemilik:* ${data.namaPemilik}
+*Nama Usaha:* ${data.namausaha}
+*Nama Pemilik:* ${data.namapemilik}
 *Kategori:* ${data.kategori}
 *Alamat:* ${data.alamat}
 *Jam Buka:* ${data.jam}
