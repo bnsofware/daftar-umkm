@@ -6,357 +6,569 @@
 <title>BN Software — Daftar UMKM ke Google Maps</title>
 <meta name="description" content="Layanan pendaftaran UMKM ke Google Maps. Solusi digital untuk masa depan Anda.">
 <link rel="icon" type="image/png" href="assets/logo-bn.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --blue-dark: #0a1e3f;
-    --blue-primary: #1565c0;
-    --blue-bright: #2196f3;
+    --navy: #0a1e3f;
+    --navy-2: #12356f;
+    --blue: #1565c0;
+    --sky: #2196f3;
+    --amber: #ffb300;
+    --ink: #14233f;
+    --muted: #5a6b85;
+    --placeholder: #93a3bb;
+    --line: #d5e0ee;
+    --edge: #c5d4e8;
+    --paper: #f3f7fc;
     --white: #ffffff;
-    --gray-50: #f8fafc;
-    --gray-200: #e2e8f0;
-    --gray-400: #94a3b8;
-    --gray-600: #475569;
-    --gray-800: #1e293b;
+    --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
   }
   html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-    background: var(--gray-50);
-    color: var(--gray-800);
+    font-family: var(--font);
+    background: #e6edf7;
+    color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  svg { display: block; }
+
   .wrap {
     max-width: 520px;
     margin: 0 auto;
     background: var(--white);
     min-height: 100vh;
-    box-shadow: 0 0 60px rgba(10, 30, 63, 0.08);
+    box-shadow: 0 0 70px rgba(10, 30, 63, 0.14);
     position: relative;
     overflow: hidden;
   }
+
+  /* ---------- Top bar ---------- */
   .topbar {
-    background: linear-gradient(90deg, var(--blue-dark), var(--blue-primary));
-    color: var(--white);
-    padding: 10px 20px;
-    font-size: 11px;
+    background: var(--navy);
+    color: rgba(255,255,255,.88);
+    padding: 9px 20px;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+  .topbar .status, .topbar .loc { display: inline-flex; align-items: center; gap: 7px; }
   .topbar .dot {
-    width: 6px; height: 6px;
+    width: 7px; height: 7px; border-radius: 50%;
     background: #4ade80;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
     box-shadow: 0 0 8px #4ade80;
     animation: pulse 2s infinite;
   }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+  /* ---------- Hero ---------- */
   .hero {
-    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-primary) 60%, var(--blue-bright) 100%);
+    background:
+      radial-gradient(circle at 50% 62%, rgba(33,150,243,.38) 0%, transparent 58%),
+      repeating-linear-gradient(26.565deg, rgba(255,255,255,.045) 0 1px, transparent 1px 38px),
+      repeating-linear-gradient(-26.565deg, rgba(255,255,255,.045) 0 1px, transparent 1px 38px),
+      linear-gradient(170deg, var(--navy) 0%, #0f3a7d 70%, #145aa8 100%);
     color: var(--white);
-    padding: 32px 20px 40px;
+    padding: 28px 20px 56px;
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-  .hero::before {
-    content: ""; position: absolute; top: -50%; right: -30%;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .hero::after {
-    content: ""; position: absolute; bottom: -40%; left: -20%;
-    width: 250px; height: 250px;
-    background: radial-gradient(circle, rgba(33,150,243,0.3) 0%, transparent 70%);
-    border-radius: 50%;
   }
   .logo-wrap {
     position: relative;
     z-index: 2;
-    margin: 0 -20px 28px -20px;
+    margin: 0 -20px 24px -20px;
     width: calc(100% + 40px);
     overflow: hidden;
   }
-  .logo-wrap img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 0;
-  }
+  .logo-wrap img { width: 100%; height: auto; display: block; }
   .logo-text-fallback {
-    font-size: 32px; font-weight: 900; letter-spacing: -1px; color: var(--white);
-    padding: 20px 0;
+    font-size: 32px; font-weight: 800; letter-spacing: -1px; color: var(--white);
+    padding: 12px 0;
   }
-  .logo-text-fallback span { color: var(--blue-bright); }
+  .logo-text-fallback span { color: #5db7ff; }
+
   .hero h1 {
     position: relative; z-index: 2;
-    font-size: 24px; font-weight: 800;
-    line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.5px;
+    font-size: clamp(26px, 7.2vw, 33px);
+    font-weight: 800;
+    line-height: 1.14;
+    letter-spacing: -0.025em;
   }
-  .hero h1 .highlight {
-    background: linear-gradient(180deg, transparent 60%, rgba(255,179,0,0.4) 60%);
-    padding: 0 4px;
+  .hero h1 .l2 { color: #ffc83d; display: block; }
+  .hero .lead {
+    position: relative; z-index: 2;
+    margin: 12px auto 0;
+    max-width: 340px;
+    font-size: 14.5px; font-weight: 500; color: rgba(255,255,255,.86);
   }
-  .hero p { position: relative; z-index: 2; font-size: 14px; opacity: 0.92; font-weight: 500; }
-  .trust { display: flex; justify-content: center; gap: 12px; margin-top: 18px; position: relative; z-index: 2; flex-wrap: wrap; }
+
+  .scene {
+    position: relative; z-index: 2;
+    margin: 18px auto 4px;
+    max-width: 430px;
+  }
+  .scene-svg { width: 100%; height: auto; filter: drop-shadow(0 22px 22px rgba(0,0,0,.35)); }
+  .pin { animation: bob 3.2s ease-in-out infinite; }
+  .pin-shadow { transform-box: fill-box; transform-origin: center; animation: shadow 3.2s ease-in-out infinite; }
+  .ring { transform-box: fill-box; transform-origin: center; animation: ping 2.6s ease-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes shadow { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.78); opacity: .65; } }
+  @keyframes ping { 0% { transform: scale(.4); opacity: .95; } 100% { transform: scale(1.35); opacity: 0; } }
+
+  .chip3d {
+    position: absolute;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 12px; font-weight: 700;
+    padding: 7px 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 0 #b9c9df, 0 12px 18px rgba(0,0,0,.25);
+    display: inline-flex; align-items: center; gap: 7px;
+    white-space: nowrap;
+  }
+  .chip3d .gdot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.22); }
+  .chip3d .stars { color: #ffb300; letter-spacing: 1px; }
+  .chip-open { left: 1%; top: 14%; }
+  .chip-rate { right: 0; top: 44%; }
+
+  .trust {
+    display: flex; justify-content: center; gap: 10px;
+    margin-top: 12px; position: relative; z-index: 2; flex-wrap: wrap;
+  }
   .trust span {
-    font-size: 11px; font-weight: 600;
-    background: rgba(255,255,255,0.15);
-    padding: 5px 12px; border-radius: 20px; backdrop-filter: blur(10px);
+    font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.18);
+    padding: 6px 13px 6px 10px; border-radius: 20px;
+    backdrop-filter: blur(8px);
+    display: inline-flex; align-items: center; gap: 6px;
   }
-  .benefits { padding: 28px 20px; background: var(--gray-50); }
-  .section-label {
-    font-size: 11px; font-weight: 700; color: var(--blue-primary);
-    letter-spacing: 1.5px; text-transform: uppercase;
-    margin-bottom: 16px; text-align: center;
+  .trust svg { width: 14px; height: 14px; }
+
+  .btn-hero {
+    position: relative; z-index: 2;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 24px;
+    padding: 15px 30px;
+    font-family: inherit; font-size: 15px; font-weight: 800;
+    color: var(--navy);
+    background: linear-gradient(180deg, #ffd45e, #ffb300);
+    border-radius: 14px;
+    text-decoration: none;
+    box-shadow: 0 6px 0 #c47f00, 0 16px 24px -6px rgba(0,0,0,.45);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-hero:active { transform: translateY(4px); box-shadow: 0 2px 0 #c47f00, 0 8px 14px -6px rgba(0,0,0,.45); }
+  .btn-hero svg { width: 18px; height: 18px; }
+
+  /* ---------- Benefits ---------- */
+  .benefits {
+    position: relative; z-index: 3;
+    margin-top: -26px;
+    border-radius: 28px 28px 0 0;
+    padding: 34px 20px 30px;
+    background:
+      repeating-linear-gradient(26.565deg, rgba(21,101,192,.05) 0 1px, transparent 1px 38px),
+      repeating-linear-gradient(-26.565deg, rgba(21,101,192,.05) 0 1px, transparent 1px 38px),
+      var(--paper);
+  }
+  .benefits h2 {
+    font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--navy); text-align: center; margin-bottom: 20px;
   }
   .benefit-item {
-    display: flex; gap: 14px;
-    padding: 14px 16px; background: var(--white);
-    border-radius: 12px; margin-bottom: 10px;
-    border: 1px solid var(--gray-200); transition: all 0.2s;
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px 14px 10px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 5px 0 var(--edge), 0 16px 24px -12px rgba(10,30,63,.28);
   }
-  .benefit-item:hover {
-    border-color: var(--blue-bright); transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(21,101,192,0.1);
+  .benefit-item:last-child { margin-bottom: 0; }
+  .cube { flex-shrink: 0; width: 76px; height: 76px; filter: drop-shadow(0 6px 5px rgba(10,30,63,.22)); }
+  .benefit-text h3 { font-size: 15px; font-weight: 800; color: var(--navy); line-height: 1.3; margin-bottom: 3px; }
+  .benefit-text p { font-size: 13px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+
+  /* ---------- Form ---------- */
+  .form-section {
+    padding: 34px 20px 44px;
+    background:
+      linear-gradient(180deg, var(--paper) 0, var(--white) 70px),
+      var(--white);
   }
-  .benefit-icon {
-    flex-shrink: 0; width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
-    border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .benefit-text { font-size: 13.5px; color: var(--gray-800); font-weight: 500; line-height: 1.5; }
-  .benefit-text strong { color: var(--blue-dark); }
-  .form-section { padding: 32px 20px 40px; background: var(--white); }
-  .form-section h2 {
-    font-size: 20px; font-weight: 800; color: var(--blue-dark);
-    margin-bottom: 6px; letter-spacing: -0.3px;
-  }
-  .form-subtitle { font-size: 13px; color: var(--gray-600); margin-bottom: 24px; }
-  .form-group { margin-bottom: 16px; }
-  label { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; color: var(--gray-800); letter-spacing: 0.2px; }
+  .form-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .form-head .ico { width: 52px; height: 52px; flex-shrink: 0; filter: drop-shadow(0 4px 4px rgba(10,30,63,.25)); }
+  .form-section h2 { font-size: 22px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; line-height: 1.2; }
+  .form-subtitle { font-size: 13.5px; color: var(--muted); margin-bottom: 26px; font-weight: 500; }
+
+  .field { margin-bottom: 20px; }
+  label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
   label .req { color: #dc2626; }
+  label .opt { color: var(--placeholder); font-weight: 600; }
+
+  .slab {
+    position: relative;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 4px 0 var(--edge), 0 14px 22px -12px rgba(10,30,63,.3);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .slab:focus-within {
+    border-color: var(--sky);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #1e7fe0, 0 10px 20px -10px rgba(33,150,243,.6), 0 0 0 4px rgba(33,150,243,.12);
+  }
+  .slab .ico {
+    position: absolute; left: 6px; top: 50%;
+    width: 52px; height: 52px;
+    margin-top: -26px;
+    filter: drop-shadow(0 4px 3px rgba(10,30,63,.28));
+    transition: transform .15s ease;
+    pointer-events: none;
+  }
+  .slab:focus-within .ico { transform: translateY(-3px); }
+  .slab.tall .ico { top: 8px; margin-top: 0; }
+
   input, select, textarea {
-    width: 100%; padding: 13px 14px;
-    border: 1.5px solid var(--gray-200); border-radius: 10px;
-    font-size: 15px; font-family: inherit;
-    background: var(--gray-50); color: var(--gray-800); transition: all 0.2s;
+    width: 100%;
+    padding: 16px 14px 16px 66px;
+    border: none;
+    background: transparent;
+    font-size: 16px; font-family: inherit; font-weight: 500;
+    color: var(--ink);
+    border-radius: 16px;
   }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--blue-bright);
-    background: var(--white); box-shadow: 0 0 0 4px rgba(33,150,243,0.12);
+  input:focus, select:focus, textarea:focus { outline: none; }
+  input::placeholder, textarea::placeholder { color: var(--placeholder); font-weight: 400; }
+  textarea { resize: vertical; min-height: 96px; display: block; }
+  select {
+    -webkit-appearance: none; appearance: none;
+    padding-right: 44px; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231565c0' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9l7 7 7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
   }
-  input::placeholder, textarea::placeholder { color: var(--gray-400); }
-  textarea { resize: vertical; min-height: 80px; }
+  select:invalid { color: var(--placeholder); font-weight: 400; }
+  select option { color: var(--ink); }
+
   .btn-primary {
     width: 100%;
-    background: linear-gradient(135deg, var(--blue-primary), var(--blue-bright));
-    color: var(--white); border: none; padding: 17px;
-    font-size: 15px; font-weight: 800; border-radius: 12px;
-    cursor: pointer; margin-top: 8px; letter-spacing: 0.3px;
-    transition: all 0.25s; box-shadow: 0 8px 20px rgba(21,101,192,0.3);
-    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(180deg, #2ea4ff, #1565c0);
+    color: var(--white); border: none; padding: 18px;
+    font-family: inherit; font-size: 16px; font-weight: 800;
+    border-radius: 16px;
+    cursor: pointer; margin-top: 8px;
+    box-shadow: 0 6px 0 #0d3f86, 0 18px 26px -8px rgba(21,101,192,.55);
+    transition: transform .12s, box-shadow .12s;
   }
-  .btn-primary::after { content: "→"; margin-left: 8px; transition: transform 0.2s; display: inline-block; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(21,101,192,0.4); }
-  .btn-primary:hover::after { transform: translateX(4px); }
-  .btn-primary:disabled { background: var(--gray-400); cursor: not-allowed; box-shadow: none; transform: none; }
-  .btn-primary:disabled::after { content: ""; }
+  .btn-primary svg { width: 20px; height: 20px; }
+  .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 #0d3f86, 0 8px 14px -8px rgba(21,101,192,.55); }
+  .btn-primary:disabled {
+    background: #9fb0c7; cursor: not-allowed;
+    box-shadow: 0 6px 0 #7f90a8;
+  }
+  .btn-primary:disabled:active { transform: none; box-shadow: 0 6px 0 #7f90a8; }
+  .btn-primary:focus-visible, .btn-hero:focus-visible, .btn-wa:focus-visible, .footer-wa:focus-visible {
+    outline: 3px solid #ffc83d; outline-offset: 3px;
+  }
+  .spinner {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.4); border-top-color: #fff;
+    animation: spin .8s linear infinite; display: none;
+  }
+  .btn-primary:disabled .spinner { display: block; }
+  .btn-primary:disabled .arrow { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
   .form-note {
-    font-size: 11.5px; color: var(--gray-600);
-    text-align: center; margin-top: 14px;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 12px; color: var(--muted); font-weight: 500;
+    text-align: center; margin-top: 20px;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
   }
-  .success { display: none; padding: 48px 24px; text-align: center; background: var(--white); }
-  .success.show { display: block; animation: fadeIn 0.4s ease; }
+  .form-note svg { width: 14px; height: 14px; }
+
+  /* ---------- Success ---------- */
+  .success { display: none; padding: 52px 24px; text-align: center; background: var(--white); }
+  .success.show { display: block; animation: fadeIn .4s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .success-icon {
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px; font-size: 40px; color: white;
-    box-shadow: 0 10px 30px rgba(22,163,74,0.3);
-  }
-  .success h2 { color: var(--gray-800); margin-bottom: 10px; font-size: 22px; }
-  .success p { color: var(--gray-600); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+  .success .cube { width: 120px; height: 120px; margin: 0 auto 14px; filter: drop-shadow(0 12px 10px rgba(22,163,74,.3)); }
+  .success h2 { color: var(--navy); margin-bottom: 10px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .success p { color: var(--muted); font-size: 14.5px; margin: 0 auto 26px; max-width: 360px; line-height: 1.65; font-weight: 500; }
   .btn-wa {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: #25D366; color: var(--white);
-    padding: 15px 28px; border-radius: 12px;
-    text-decoration: none; font-weight: 800; font-size: 14.5px;
-    box-shadow: 0 8px 20px rgba(37,211,102,0.35); transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(180deg, #2fe477, #1fb855); color: var(--white);
+    padding: 16px 30px; border-radius: 16px;
+    text-decoration: none; font-weight: 800; font-size: 15px;
+    box-shadow: 0 6px 0 #138a3e, 0 16px 24px -8px rgba(37,211,102,.5);
+    transition: transform .12s, box-shadow .12s;
   }
-  .btn-wa:hover { transform: translateY(-2px); }
+  .btn-wa:active { transform: translateY(4px); box-shadow: 0 2px 0 #138a3e; }
+  .btn-wa svg, .footer-wa svg { width: 20px; height: 20px; }
+
+  /* ---------- Footer ---------- */
   .footer {
-    background: var(--blue-dark);
+    background:
+      repeating-linear-gradient(26.565deg, rgba(255,255,255,.04) 0 1px, transparent 1px 38px),
+      repeating-linear-gradient(-26.565deg, rgba(255,255,255,.04) 0 1px, transparent 1px 38px),
+      var(--navy);
     color: var(--white);
-    padding: 32px 24px 28px;
+    padding: 36px 20px 28px;
     text-align: center;
   }
-  .footer-logo {
-    width: 55%;
-    max-width: 200px;
-    height: auto;
-    display: block;
-    margin: 0 auto 18px;
-    border-radius: 10px;
-    opacity: 0.95;
-  }
-  .footer-tagline {
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 18px;
-    letter-spacing: 0.3px;
-  }
+  .footer-logo { width: 55%; max-width: 200px; height: auto; display: block; margin: 0 auto 16px; border-radius: 10px; opacity: .95; }
+  .footer-tagline { font-size: 13px; color: rgba(255,255,255,.72); margin-bottom: 24px; font-weight: 500; }
   .footer-services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 22px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    margin-bottom: 26px;
   }
-  .footer-services span {
-    font-size: 10.5px;
-    background: rgba(255,255,255,0.1);
-    padding: 5px 10px;
-    border-radius: 6px;
-    color: rgba(255,255,255,0.85);
-  }
+  .footer-services div { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.85); line-height: 1.3; }
+  .footer-services .ico { width: 54px; height: 54px; filter: drop-shadow(0 6px 5px rgba(0,0,0,.4)); }
   .footer-wa {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 13.5px;
-    padding: 12px 24px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px;
-    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--white); text-decoration: none;
+    font-weight: 700; font-size: 14px;
+    padding: 13px 24px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 14px;
+    box-shadow: 0 4px 0 rgba(0,0,0,.28);
+    transition: transform .12s, box-shadow .12s;
   }
-  .footer-wa:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-1px);
+  .footer-wa:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.28); }
+  .footer-copy { margin-top: 24px; font-size: 11.5px; color: rgba(255,255,255,.5); }
+
+  @media (max-width: 380px) {
+    .chip-open, .chip-rate { font-size: 11px; padding: 6px 10px; }
+    .footer-services { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   }
-  .footer-copy {
-    margin-top: 22px;
-    font-size: 11px;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.3px;
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 </style>
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<g id="g-store"><path d="M-11 -4 L-8 -11 H8 L11 -4 Z"/><path d="M-9 -4 V10 H9 V-4"/><path d="M-3 10 V3 H3 V10"/></g>
+<g id="g-user"><circle cx="0" cy="-5" r="5"/><path d="M-10 11 C-10 3 10 3 10 11"/></g>
+<g id="g-phone"><rect x="-7" y="-11" width="14" height="22" rx="3"/><path d="M-2 7 H2"/></g>
+<g id="g-mail"><rect x="-11" y="-8" width="22" height="16" rx="2"/><path d="M-11 -6 L0 3 L11 -6"/></g>
+<g id="g-grid"><rect x="-10" y="-10" width="8" height="8" rx="2"/><rect x="2" y="-10" width="8" height="8" rx="2"/><rect x="-10" y="2" width="8" height="8" rx="2"/><rect x="2" y="2" width="8" height="8" rx="2"/></g>
+<g id="g-pin"><path d="M0 12 C-7 4 -9 0 -9 -4 A9 9 0 0 1 9 -4 C9 0 7 4 0 12 Z"/><circle cx="0" cy="-4" r="3"/></g>
+<g id="g-clock"><circle cx="0" cy="0" r="11"/><path d="M0 -6 V0 L5 3"/></g>
+<g id="g-note"><rect x="-9" y="-11" width="18" height="22" rx="2"/><path d="M-4 -4 H4 M-4 1 H4 M-4 6 H1"/></g>
+<g id="g-globe"><circle cx="0" cy="0" r="11"/><ellipse cx="0" cy="0" rx="5" ry="11"/><path d="M-11 0 H11"/></g>
+<g id="g-cloud"><path d="M-9 8 A6 6 0 0 1 -8 -3 A9 9 0 0 1 9 -3 A5.5 5.5 0 0 1 9 8 Z"/></g>
+<g id="g-gear"><circle cx="0" cy="0" r="8"/><circle cx="0" cy="0" r="3"/><path d="M9.00 0.00 L13.00 0.00"/><path d="M6.36 6.36 L9.19 9.19"/><path d="M0.00 9.00 L0.00 13.00"/><path d="M-6.36 6.36 L-9.19 9.19"/><path d="M-9.00 0.00 L-13.00 0.00"/><path d="M-6.36 -6.36 L-9.19 -9.19"/><path d="M-0.00 -9.00 L-0.00 -13.00"/><path d="M6.36 -6.36 L9.19 -9.19"/></g>
+<g id="g-headset"><path d="M-9.5 -2 A9.5 9.5 0 0 1 9.5 -2"/><rect x="-12" y="-2" width="5" height="10" rx="2"/><rect x="7" y="-2" width="5" height="10" rx="2"/><path d="M9.5 8 Q9.5 12 3 12"/></g>
+</defs></svg>
+
 <div class="wrap">
 
   <div class="topbar">
-    <div><span class="dot"></span>ONLINE — SIAP BANTU</div>
-    <div>🇮🇩 RANGKASBITUNG</div>
+    <div class="status"><span class="dot"></span>Online, siap bantu</div>
+    <div class="loc"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22 C6 15 4 11 4 8.5 A8 8 0 0 1 20 8.5 C20 11 18 15 12 22 Z" fill="#ffb300"/><circle cx="12" cy="9" r="3" fill="#fff"/></svg> Rangkasbitung</div>
   </div>
 
   <div class="hero">
     <div class="logo-wrap">
-      <img src="assets/logo-bn.png" alt="BN Software" 
+      <img src="assets/logo-bn.png" alt="BN Software"
            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
       <div class="logo-text-fallback" style="display:none;">B<span>N</span> Software</div>
     </div>
-    <h1>TOKO ANDA <span class="highlight">BELUM ADA</span><br>DI GOOGLE MAPS?</h1>
-    <p>Bantu daftar sampai tampil & terverifikasi</p>
-    <div class="trust">
-      <span>✓ 100% Gratis Konsultasi</span>
-      <span>✓ Proses Cepat</span>
+
+    <h1>Toko Anda belum ada <span class="l2">di Google Maps?</span></h1>
+    <p class="lead">Kami bantu daftar sampai toko Anda tampil dan terverifikasi.</p>
+
+    <div class="scene">
+      <svg class="scene-svg" viewBox="0 0 420 280" role="img" aria-label="Ilustrasi isometrik peta kota dengan pin lokasi toko">
+<defs><linearGradient id="pinG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe082"/><stop offset="1" stop-color="#ff9800"/></linearGradient></defs>
+<polygon points="60.0,171.0 210.0,246.0 210.0,262.0 60.0,187.0" fill="#0f3068"/>
+<polygon points="210.0,246.0 360.0,171.0 360.0,187.0 210.0,262.0" fill="#0b2552"/>
+<polygon points="210.0,96.0 360.0,171.0 210.0,246.0 60.0,171.0" fill="#1b4b99"/>
+<line x1="247.5" y1="114.75" x2="97.5" y2="189.75" stroke="rgba(255,255,255,.07)"/>
+<line x1="172.5" y1="114.75" x2="322.5" y2="189.75" stroke="rgba(255,255,255,.07)"/>
+<line x1="285.0" y1="133.5" x2="135.0" y2="208.5" stroke="rgba(255,255,255,.07)"/>
+<line x1="135.0" y1="133.5" x2="285.0" y2="208.5" stroke="rgba(255,255,255,.07)"/>
+<line x1="322.5" y1="152.25" x2="172.5" y2="227.25" stroke="rgba(255,255,255,.07)"/>
+<line x1="97.5" y1="152.25" x2="247.5" y2="227.25" stroke="rgba(255,255,255,.07)"/>
+<polygon points="141.0,130.5 291.0,205.5 276.0,213.0 126.0,138.0" fill="#12356f"/>
+<polygon points="279.0,130.5 294.0,138.0 144.0,213.0 129.0,205.5" fill="#12356f"/>
+<line x1="133.5" y1="134.25" x2="198.0" y2="166.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<line x1="222.0" y1="178.5" x2="283.5" y2="209.25" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<line x1="286.5" y1="134.25" x2="222.0" y2="166.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<line x1="198.0" y1="178.5" x2="136.5" y2="209.25" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-dasharray="7 6"/>
+<polygon points="165.0,72.5 210.0,95.0 210.0,153.0 165.0,130.5" fill="#c9ddf5"/><polygon points="210.0,95.0 255.0,72.5 255.0,130.5 210.0,153.0" fill="#a3c4ec"/><polygon points="210.0,50.0 255.0,72.5 210.0,95.0 165.0,72.5" fill="#f1f7ff"/>
+<polygon points="178.5,137.2 189.0,142.5 189.0,116.5 178.5,111.2" fill="#1a62b5"/>
+<polygon points="193.5,130.8 205.5,136.8 205.5,118.8 193.5,112.8" fill="#7ec3ff"/>
+<polygon points="168.0,118.0 175.5,121.8 175.5,103.8 168.0,100.0" fill="#7ec3ff"/>
+<polygon points="246.0,115.0 234.0,121.0 234.0,101.0 246.0,95.0" fill="#5aa2ec"/>
+<polygon points="228.0,124.0 216.0,130.0 216.0,110.0 228.0,104.0" fill="#5aa2ec"/>
+<polygon points="156.0,91.0 201.0,113.5 201.0,121.5 156.0,99.0" fill="#ffb300"/><polygon points="201.0,113.5 210.0,109.0 210.0,117.0 201.0,121.5" fill="#f57c00"/><polygon points="165.0,86.5 210.0,109.0 201.0,113.5 156.0,91.0" fill="#ffd54f"/>
+<polygon points="198.0,55.0 210.0,61.0 210.0,71.0 198.0,65.0" fill="#ffb300"/><polygon points="210.0,61.0 222.0,55.0 222.0,65.0 210.0,71.0" fill="#f57c00"/><polygon points="210.0,49.0 222.0,55.0 210.0,61.0 198.0,55.0" fill="#ffd54f"/>
+<polygon points="255.0,130.5 297.0,151.5 297.0,187.5 255.0,166.5" fill="#c9ddf5"/><polygon points="297.0,151.5 330.0,135.0 330.0,171.0 297.0,187.5" fill="#a3c4ec"/><polygon points="288.0,114.0 330.0,135.0 297.0,151.5 255.0,130.5" fill="#f1f7ff"/>
+<polygon points="276.0,124.0 291.0,131.5 291.0,139.5 276.0,132.0" fill="#2d82e0"/><polygon points="291.0,131.5 306.0,124.0 306.0,132.0 291.0,139.5" fill="#1a62b5"/><polygon points="291.0,116.5 306.0,124.0 291.0,131.5 276.0,124.0" fill="#6fb4ff"/>
+<polygon points="286.5,179.8 294.0,183.5 294.0,199.5 286.5,195.8" fill="#2e9e5b"/><polygon points="294.0,183.5 301.5,179.8 301.5,195.8 294.0,199.5" fill="#1f7a45"/><polygon points="294.0,176.0 301.5,179.8 294.0,183.5 286.5,179.8" fill="#5fd38d"/>
+<polygon points="90.0,142.0 129.0,161.5 129.0,187.5 90.0,168.0" fill="#f2d58c"/><polygon points="129.0,161.5 168.0,142.0 168.0,168.0 129.0,187.5" fill="#e0b85e"/><polygon points="129.0,122.5 168.0,142.0 129.0,161.5 90.0,142.0" fill="#fff4d6"/>
+<polygon points="150.0,171.0 159.0,175.5 159.0,187.5 150.0,183.0" fill="#2d82e0"/><polygon points="159.0,175.5 171.0,169.5 171.0,181.5 159.0,187.5" fill="#1a62b5"/><polygon points="162.0,165.0 171.0,169.5 159.0,175.5 150.0,171.0" fill="#6fb4ff"/>
+<polygon points="136.5,174.8 144.0,178.5 144.0,196.5 136.5,192.8" fill="#2e9e5b"/><polygon points="144.0,178.5 151.5,174.8 151.5,192.8 144.0,196.5" fill="#1f7a45"/><polygon points="144.0,171.0 151.5,174.8 144.0,178.5 136.5,174.8" fill="#5fd38d"/>
+<polygon points="171.0,179.5 213.0,200.5 213.0,232.5 171.0,211.5" fill="#c9ddf5"/><polygon points="213.0,200.5 255.0,179.5 255.0,211.5 213.0,232.5" fill="#a3c4ec"/><polygon points="213.0,158.5 255.0,179.5 213.0,200.5 171.0,179.5" fill="#f1f7ff"/>
+<polygon points="177.0,209.5 187.5,214.8 187.5,205.8 177.0,200.5" fill="#7ec3ff"/>
+<polygon points="177.0,195.5 187.5,200.8 187.5,191.8 177.0,186.5" fill="#7ec3ff"/>
+<polygon points="192.0,217.0 202.5,222.2 202.5,213.2 192.0,208.0" fill="#7ec3ff"/>
+<polygon points="192.0,203.0 202.5,208.2 202.5,199.2 192.0,194.0" fill="#7ec3ff"/>
+<polygon points="249.0,202.5 238.5,207.8 238.5,193.8 249.0,188.5" fill="#5aa2ec"/>
+<polygon points="231.0,211.5 220.5,216.8 220.5,202.8 231.0,197.5" fill="#5aa2ec"/>
+<polygon points="195.0,171.5 213.0,180.5 213.0,188.5 195.0,179.5" fill="#2d82e0"/><polygon points="213.0,180.5 231.0,171.5 231.0,179.5 213.0,188.5" fill="#1a62b5"/><polygon points="213.0,162.5 231.0,171.5 213.0,180.5 195.0,171.5" fill="#6fb4ff"/>
+<polygon points="165.0,191.5 171.0,194.5 171.0,208.5 165.0,205.5" fill="#2e9e5b"/><polygon points="171.0,194.5 177.0,191.5 177.0,205.5 171.0,208.5" fill="#1f7a45"/><polygon points="171.0,188.5 177.0,191.5 171.0,194.5 165.0,191.5" fill="#5fd38d"/>
+<ellipse class="ring" cx="210" cy="171" rx="44" ry="22" fill="none" stroke="#ffb300" stroke-width="3"/>
+<ellipse class="pin-shadow" cx="210" cy="171" rx="20" ry="10" fill="rgba(0,0,0,.38)"/>
+<g class="pin"><path d="M210 124 C192 100 180 86 180 66 A30 30 0 0 1 240 66 C240 86 228 100 210 124 Z" fill="url(#pinG)"/><path d="M210 36 A30 30 0 0 1 240 66 C240 86 228 100 210 124 Z" fill="rgba(160,70,0,.28)"/><circle cx="210" cy="68" r="12" fill="rgba(120,50,0,.35)"/><circle cx="210" cy="66" r="12" fill="#fff8e6"/><path d="M190 52 A26 26 0 0 1 204 41" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/></g>
+</svg>
+      <div class="chip3d chip-open"><span class="gdot"></span>Buka sekarang</div>
+      <div class="chip3d chip-rate"><span class="stars">★★★★★</span>4,9</div>
     </div>
+
+    <div class="trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg> Konsultasi gratis</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7"/></svg> Proses cepat</span>
+    </div>
+
+    <a href="#formSection" class="btn-hero">Daftar sekarang
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M5 12l7 7 7-7"/></svg>
+    </a>
   </div>
 
   <div class="benefits">
-    <div class="section-label">KENAPA PENTING?</div>
+    <h2>Kenapa penting untuk usaha Anda?</h2>
     <div class="benefit-item">
-      <div class="benefit-icon">📍</div>
-      <div class="benefit-text">Orang cari <strong>"dekat sini"</strong> → toko Anda langsung muncul</div>
+      <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><path d="M40 47 C33 38 30 33 30 27 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="#ffb300"/><path d="M40 17 A10 10 0 0 1 50 27 C50 33 47 38 40 47 Z" fill="rgba(160,70,0,.3)"/><circle cx="40" cy="27" r="4.2" fill="#fff8e6"/></svg>
+      <div class="benefit-text">
+        <h3>Muncul saat orang cari “dekat sini”</h3>
+        <p>Toko Anda langsung tampil di peta dan hasil pencarian sekitar lokasi.</p>
+      </div>
     </div>
     <div class="benefit-item">
-      <div class="benefit-icon">⭐</div>
-      <div class="benefit-text">Pelanggan <strong>lebih percaya</strong> sebelum datang ke toko</div>
+      <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><polygon points="40.0,14.0 43.5,23.1 53.3,23.7 45.7,29.9 48.2,39.3 40.0,34.0 31.8,39.3 34.3,29.9 26.7,23.7 36.5,23.1" fill="#b36b00" transform="translate(3 2)"/><polygon points="40.0,14.0 43.5,23.1 53.3,23.7 45.7,29.9 48.2,39.3 40.0,34.0 31.8,39.3 34.3,29.9 26.7,23.7 36.5,23.1" fill="#ffc83d" stroke="#ffb300" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <div class="benefit-text">
+        <h3>Pelanggan lebih percaya</h3>
+        <p>Rating, ulasan, dan foto bikin orang yakin sebelum datang ke toko.</p>
+      </div>
     </div>
     <div class="benefit-item">
-      <div class="benefit-icon">📱</div>
-      <div class="benefit-text">Foto, jam buka, dan <strong>nomor WA</strong> tampil lengkap</div>
+      <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#1976d2"/><polygon points="40,60 66,47 66,61 40,74" fill="#0d47a1"/><polygon points="40,34 66,47 40,60 14,47" fill="#5db7ff"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><rect x="30" y="8" width="20" height="36" rx="4.5" fill="#0a1e3f" transform="translate(3 2)"/><rect x="30" y="8" width="20" height="36" rx="4.5" fill="#f1f7ff"/><rect x="33" y="12" width="14" height="26" rx="2.5" fill="#2d82e0"/><circle cx="40" cy="21" r="3.2" fill="#ffc83d"/><path d="M36 29 H44 M36 33 H42" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div class="benefit-text">
+        <h3>Info lengkap dalam satu tempat</h3>
+        <p>Foto, jam buka, dan nomor WA tampil rapi dan bisa langsung dihubungi.</p>
+      </div>
     </div>
   </div>
 
   <div class="form-section" id="formSection">
-    <h2>📝 Daftar Sekarang</h2>
-    <p class="form-subtitle">Isi data usaha Anda, kami hubungi dalam 1x24 jam</p>
+    <div class="form-head">
+      <svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
+      <h2>Daftar sekarang</h2>
+    </div>
+    <p class="form-subtitle">Isi data usaha Anda, kami hubungi dalam 1x24 jam.</p>
 
     <form id="umkmForm">
       <!-- Field rahasia untuk keamanan — harus sama dengan SECRET_KEY di Apps Script -->
       <input type="hidden" name="secret" value="bn2026rahasia">
 
-      <div class="form-group">
-        <label>Nama Usaha <span class="req">*</span></label>
-        <input type="text" name="namausaha" required placeholder="Contoh: Warung Kopi Pak Budi">
+      <div class="field">
+        <label for="f-namausaha">Nama usaha <span class="req">*</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-store"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-store"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-store"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-store"/></g></g></svg>
+          <input id="f-namausaha" type="text" name="namausaha" required autocomplete="organization" placeholder="Contoh: Warung Kopi Pak Budi">
+        </div>
       </div>
-      <div class="form-group">
-        <label>Nama Pemilik <span class="req">*</span></label>
-        <input type="text" name="namapemilik" required placeholder="Contoh: Budi Santoso">
+
+      <div class="field">
+        <label for="f-namapemilik">Nama pemilik <span class="req">*</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-user"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-user"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-user"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-user"/></g></g></svg>
+          <input id="f-namapemilik" type="text" name="namapemilik" required autocomplete="name" placeholder="Contoh: Budi Santoso">
+        </div>
       </div>
-      <div class="form-group">
-        <label>Nomor WhatsApp <span class="req">*</span></label>
-        <input type="tel" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
+
+      <div class="field">
+        <label for="f-whatsapp">Nomor WhatsApp <span class="req">*</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-phone"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-phone"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-phone"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-phone"/></g></g></svg>
+          <input id="f-whatsapp" type="tel" inputmode="tel" name="whatsapp" required autocomplete="tel" placeholder="08xx-xxxx-xxxx">
+        </div>
       </div>
-      <div class="form-group">
-        <label>Email (opsional)</label>
-        <input type="email" name="email" placeholder="email@contoh.com">
+
+      <div class="field">
+        <label for="f-email">Email <span class="opt">(opsional)</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-mail"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-mail"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-mail"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-mail"/></g></g></svg>
+          <input id="f-email" type="email" name="email" autocomplete="email" placeholder="email@contoh.com">
+        </div>
       </div>
-      <div class="form-group">
-        <label>Kategori Usaha <span class="req">*</span></label>
-        <select name="kategori" required>
-          <option value="">-- Pilih Kategori --</option>
-          <option>Warung Kopi / Cafe</option>
-          <option>Warung Makan / Resto</option>
-          <option>Toko Kelontong</option>
-          <option>Laundry</option>
-          <option>Bengkel</option>
-          <option>Toko Kue / Bakery</option>
-          <option>Salon / Barbershop</option>
-          <option>Oleh-oleh / Snack</option>
-          <option>Lainnya</option>
-        </select>
+
+      <div class="field">
+        <label for="f-kategori">Kategori usaha <span class="req">*</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-grid"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-grid"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-grid"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-grid"/></g></g></svg>
+          <select id="f-kategori" name="kategori" required>
+            <option value="">Pilih kategori usaha</option>
+            <option>Warung Kopi / Cafe</option>
+            <option>Warung Makan / Resto</option>
+            <option>Toko Kelontong</option>
+            <option>Laundry</option>
+            <option>Bengkel</option>
+            <option>Toko Kue / Bakery</option>
+            <option>Salon / Barbershop</option>
+            <option>Oleh-oleh / Snack</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Alamat Lengkap <span class="req">*</span></label>
-        <textarea name="alamat" required placeholder="Jalan, nomor, RT/RW, desa, kecamatan, kode pos"></textarea>
+
+      <div class="field">
+        <label for="f-alamat">Alamat lengkap <span class="req">*</span></label>
+        <div class="slab tall"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-pin"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-pin"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-pin"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-pin"/></g></g></svg>
+          <textarea id="f-alamat" name="alamat" required autocomplete="street-address" placeholder="Jalan, nomor, RT/RW, desa, kecamatan, kode pos"></textarea>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Jam Operasional <span class="req">*</span></label>
-        <input type="text" name="jam" required placeholder="Contoh: Senin-Sabtu 08.00-21.00">
+
+      <div class="field">
+        <label for="f-jam">Jam operasional <span class="req">*</span></label>
+        <div class="slab"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-clock"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-clock"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-clock"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-clock"/></g></g></svg>
+          <input id="f-jam" type="text" name="jam" required placeholder="Contoh: Senin-Sabtu 08.00-21.00">
+        </div>
       </div>
-      <div class="form-group">
-        <label>Catatan Tambahan (opsional)</label>
-        <textarea name="catatan" placeholder="Contoh: Toko sudah 5 tahun buka, belum pernah online"></textarea>
+
+      <div class="field">
+        <label for="f-catatan">Catatan tambahan <span class="opt">(opsional)</span></label>
+        <div class="slab tall"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-note"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-note"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-note"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-note"/></g></g></svg>
+          <textarea id="f-catatan" name="catatan" placeholder="Contoh: Toko sudah 5 tahun buka, belum pernah online"></textarea>
+        </div>
       </div>
-      <button type="submit" class="btn-primary" id="submitBtn">Kirim Pendaftaran</button>
-      <div class="form-note">🔒 Data Anda aman & tidak dibagikan ke pihak lain</div>
+
+      <button type="submit" class="btn-primary" id="submitBtn">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="lbl">Kirim pendaftaran</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </button>
+      <div class="form-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        Data Anda aman dan tidak dibagikan ke pihak lain
+      </div>
     </form>
   </div>
 
   <div class="success" id="successSection">
-    <div class="success-icon">✓</div>
-    <h2>Pendaftaran Terkirim!</h2>
+    <svg class="cube" viewBox="0 0 80 80" aria-hidden="true"><polygon points="14,47 40,60 40,74 14,61" fill="#16a34a"/><polygon points="40,60 66,47 66,61 40,74" fill="#15803d"/><polygon points="40,34 66,47 40,60 14,47" fill="#6ee7a0"/><ellipse cx="40" cy="47" rx="12" ry="6" fill="rgba(0,20,60,.28)"/><g transform="translate(40 26)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-12 1 L-4 9 L13 -10" stroke="#0f5e2e" stroke-width="8" transform="translate(3 2.5)"/><path d="M-12 1 L-4 9 L13 -10" stroke="#ffffff" stroke-width="8"/></g></svg>
+    <h2>Pendaftaran terkirim!</h2>
     <p>Terima kasih. Tim BN Software akan menghubungi Anda via WhatsApp dalam 1x24 jam untuk proses selanjutnya.</p>
-    <a href="#" class="btn-wa" id="waFollowUp" target="_blank">
-      <span>💬</span> Chat Kami Sekarang
+    <a href="#" class="btn-wa" id="waFollowUp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 L5.4 15.6 A8.5 8.5 0 1 1 8.6 18.8 Z"/><path d="M9 9.5 c0 3 2.5 5.5 5.5 5.5"/></svg> Chat kami sekarang
     </a>
   </div>
 
@@ -365,13 +577,13 @@
          onerror="this.style.display='none';">
     <div class="footer-tagline">Solusi Digital untuk Masa Depan Anda</div>
     <div class="footer-services">
-      <span>🌐 Web & Mobile App</span>
-      <span>☁️ Cloud Solutions</span>
-      <span>⚙️ System Development</span>
-      <span>🎧 IT Support</span>
+      <div><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-globe"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-globe"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-globe"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-globe"/></g></g></svg><span>Web &amp; Mobile App</span></div>
+      <div><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-cloud"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-cloud"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-cloud"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-cloud"/></g></g></svg><span>Cloud Solutions</span></div>
+      <div><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-gear"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-gear"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-gear"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-gear"/></g></g></svg><span>System Development</span></div>
+      <div><svg class="ico" viewBox="0 0 64 64" aria-hidden="true"><polygon points="6,45 32,58 32,64 6,51" fill="#1565c0"/><polygon points="32,58 58,45 58,51 32,64" fill="#0d47a1"/><polygon points="32,32 58,45 32,58 6,45" fill="#42a5ff"/><ellipse cx="32" cy="45" rx="13" ry="6.5" fill="rgba(0,30,90,.32)"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><g transform="translate(35.6 26.8) scale(1.12)" stroke="#0a3a82"><use href="#g-headset"/></g><g transform="translate(34.4 26.2) scale(1.12)" stroke="#0d47a1"><use href="#g-headset"/></g><g transform="translate(33.2 25.6) scale(1.12)" stroke="#1565c0"><use href="#g-headset"/></g><g transform="translate(32 25) scale(1.12)" stroke="#ffffff"><use href="#g-headset"/></g></g></svg><span>IT Support</span></div>
     </div>
-    <a href="#" class="footer-wa" id="waFooter" target="_blank">
-      <span>💬</span> WhatsApp: 0815-8222-529
+    <a href="#" class="footer-wa" id="waFooter" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 L5.4 15.6 A8.5 8.5 0 1 1 8.6 18.8 Z"/><path d="M9 9.5 c0 3 2.5 5.5 5.5 5.5"/></svg> <span class="lbl">WhatsApp: 0815-8222-529</span>
     </a>
     <div class="footer-copy">© 2026 BN Software. All rights reserved.</div>
   </div>
@@ -387,14 +599,14 @@
 
   // Setup footer WA
   document.getElementById('waFooter').href = `https://wa.me/${WA_KAMU}`;
-  document.getElementById('waFooter').innerHTML = `<span>💬</span> WhatsApp: +${WA_KAMU}`;
 
   // Handle submit
   document.getElementById('umkmForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
+    const lbl = btn.querySelector('.lbl');
     btn.disabled = true;
-    btn.textContent = 'Mengirim...';
+    lbl.textContent = 'Mengirim...';
 
     const formData = new FormData(this);
     const urlEncodedData = new URLSearchParams(formData).toString();
@@ -419,7 +631,7 @@
     } catch (err) {
       alert('Gagal kirim: ' + err.message + '\n\nCoba lagi atau hubungi WA langsung.');
       btn.disabled = false;
-      btn.textContent = 'Kirim Pendaftaran';
+      lbl.textContent = 'Kirim pendaftaran';
     }
   });
 
