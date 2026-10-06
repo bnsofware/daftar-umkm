@@ -60,7 +60,7 @@
   .hero {
     background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-primary) 60%, var(--blue-bright) 100%);
     color: var(--white);
-    padding: 40px 24px 48px;
+    padding: 32px 20px 40px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -77,13 +77,28 @@
     background: radial-gradient(circle, rgba(33,150,243,0.3) 0%, transparent 70%);
     border-radius: 50%;
   }
-  .logo-wrap { position: relative; z-index: 2; margin-bottom: 24px; }
-  .logo-wrap img { max-width: 180px; height: auto; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25)); }
-  .logo-text-fallback { font-size: 32px; font-weight: 900; letter-spacing: -1px; color: var(--white); }
+  /* LOGO MELEBAR KE KIRI-KANAN */
+  .logo-wrap {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 28px;
+    padding: 0 8px;
+  }
+  .logo-wrap img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  .logo-text-fallback {
+    font-size: 32px; font-weight: 900; letter-spacing: -1px; color: var(--white);
+  }
   .logo-text-fallback span { color: var(--blue-bright); }
   .hero h1 {
     position: relative; z-index: 2;
-    font-size: 26px; font-weight: 800;
+    font-size: 24px; font-weight: 800;
     line-height: 1.25; margin-bottom: 12px; letter-spacing: -0.5px;
   }
   .hero h1 .highlight {
@@ -91,13 +106,13 @@
     padding: 0 4px;
   }
   .hero p { position: relative; z-index: 2; font-size: 14px; opacity: 0.92; font-weight: 500; }
-  .trust { display: flex; justify-content: center; gap: 16px; margin-top: 20px; position: relative; z-index: 2; flex-wrap: wrap; }
+  .trust { display: flex; justify-content: center; gap: 12px; margin-top: 18px; position: relative; z-index: 2; flex-wrap: wrap; }
   .trust span {
     font-size: 11px; font-weight: 600;
     background: rgba(255,255,255,0.15);
     padding: 5px 12px; border-radius: 20px; backdrop-filter: blur(10px);
   }
-  .benefits { padding: 28px 24px; background: var(--gray-50); }
+  .benefits { padding: 28px 20px; background: var(--gray-50); }
   .section-label {
     font-size: 11px; font-weight: 700; color: var(--blue-primary);
     letter-spacing: 1.5px; text-transform: uppercase;
@@ -121,7 +136,7 @@
   }
   .benefit-text { font-size: 13.5px; color: var(--gray-800); font-weight: 500; line-height: 1.5; }
   .benefit-text strong { color: var(--blue-dark); }
-  .form-section { padding: 32px 24px 40px; background: var(--white); }
+  .form-section { padding: 32px 20px 40px; background: var(--white); }
   .form-section h2 {
     font-size: 20px; font-weight: 800; color: var(--blue-dark);
     margin-bottom: 6px; letter-spacing: -0.3px;
@@ -181,8 +196,8 @@
     box-shadow: 0 8px 20px rgba(37,211,102,0.35); transition: all 0.2s;
   }
   .btn-wa:hover { transform: translateY(-2px); }
-  .footer { background: var(--blue-dark); color: var(--white); padding: 28px 24px; text-align: center; }
-  .footer-logo { max-width: 120px; margin-bottom: 12px; opacity: 0.95; }
+  .footer { background: var(--blue-dark); color: var(--white); padding: 28px 20px; text-align: center; }
+  .footer-logo { max-width: 120px; margin-bottom: 12px; opacity: 0.95; border-radius: 8px; }
   .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
   .footer-services { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
   .footer-services span {
@@ -256,6 +271,10 @@
         <input type="tel" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
       </div>
       <div class="form-group">
+        <label>Email (opsional)</label>
+        <input type="email" name="email" placeholder="email@contoh.com">
+      </div>
+      <div class="form-group">
         <label>Kategori Usaha <span class="req">*</span></label>
         <select name="kategori" required>
           <option value="">-- Pilih Kategori --</option>
@@ -316,22 +335,16 @@
 
 <script>
   // ==========================================
-  // GANTI BAGIAN INI DENGAN DATA KAMU
+  // KONFIGURASI
   // ==========================================
-  const WA_KAMU = "628158222529"; // ✅ SUDAH DIPERBAIKI — format 62 tanpa 0 di depan
-  
-  // ==========================================
-  // WAJIB DIISI: Daftar gratis di formspree.io
-  // Copy endpoint URL di sini
-  // ==========================================
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/maeqywwq"; // contoh: "https://formspree.io/f/xyzabcd"
+  const WA_KAMU = "628158222529";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/maeqywwq";
 
-  // ==========================================
-  // JANGAN UBAH DI BAWAH INI
-  // ==========================================
+  // Setup footer WA
   document.getElementById('waFooter').href = `https://wa.me/${WA_KAMU}`;
   document.getElementById('waFooter').innerHTML = `<span>💬</span> WhatsApp: +${WA_KAMU}`;
 
+  // Handle submit
   document.getElementById('umkmForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
@@ -341,26 +354,23 @@
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
 
-    if (FORMSPREE_ENDPOINT) {
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: formData
-        });
-        if (res.ok) {
-          showSuccess(data);
-        } else {
-          throw new Error('Gagal kirim');
-        }
-      } catch (err) {
-        alert('Gagal kirim. Coba lagi atau hubungi WA langsung.');
-        btn.disabled = false;
-        btn.textContent = 'Kirim Pendaftaran';
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+
+      if (res.ok) {
+        showSuccess(data);
+      } else {
+        const err = await res.json();
+        throw new Error(err.error || 'Gagal kirim');
       }
-    } else {
-      // Fallback: tanpa Formspree, langsung ke WA
-      showSuccess(data);
+    } catch (err) {
+      alert('Gagal kirim: ' + err.message + '\n\nCoba lagi atau hubungi WA langsung.');
+      btn.disabled = false;
+      btn.textContent = 'Kirim Pendaftaran';
     }
   });
 
